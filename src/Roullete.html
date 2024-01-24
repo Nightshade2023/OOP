@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Roulette Wheel Simulation</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div id="results">
+        <p id="number"></p>
+        <p id="color"></p>
+        <p id="parity"></p>
+        <p id="range"></p>
+    </div>
+</body>
+<script>
+    const rouletteWheel = ['0', '34', '10', '21', '28', '4', '18', '9', '27', '22', '12', '3', '17', '20', '11', '33', '2', '10', '32', '00', '15', '8', '25', '1', '31', '20', '14', '30', '7', '24', '29', '35', '6', '13', '23', '19', '5', '36'];
+
+    function spinRouletteWheel() {
+        const randomNumber = rouletteWheel[Math.floor(Math.random() * rouletteWheel.length)];
+        const color = (randomNumber === '00') ? 'Black' : (parseInt(randomNumber) % 2 === 0) ? 'Red' : 'Black';
+        const parity = (parseInt(randomNumber) % 2 === 0) ? 'Even' : 'Odd';
+        const range = (parseInt(randomNumber) >= 1 && parseInt(randomNumber) <= 18) ? 'Failed' : 'Passed';
+
+        document.getElementById("number").innerText = `${randomNumber}`;
+        document.getElementById("color").innerText = `${color}`;
+        document.getElementById("parity").innerText = `${parity}`;
+        document.getElementById("range").innerText = `${range}`;
+    }
+
+    spinRouletteWheel();
+</script>
+
+</html>
