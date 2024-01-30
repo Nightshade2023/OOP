@@ -15,10 +15,7 @@ def makeApp():
         ("/",index.Handler),
         ("/quote",quote.Handler),
         ("/fancy",TemplateTest.Handler),
-        ("/alice",account.ProfileHandler),
-        ("/bob",account.ProfileHandler),
-        ("/carol",account.ProfileHandler),
-        ("/dave",account.ProfileHandler),
+        ("/account/.*",account.Handler),
         ("/roullete", Roullete.Handler)
     ]
     app = tornado.web.Application(endpoints,

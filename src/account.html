@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Display Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #1a237e, #673ab7);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .account-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 20 20 40px rgba(0, 0, 0, 1);
+            text-align: center;
+        }
+
+        .profile-picture {
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .account-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .account-info p {
+            margin-bottom: 16px;
+            color: #333;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="account-container">
+        <img class="profile-picture" src="https://picsum.photos/200" alt="Random Profile Picture" width="100">
 
-    {{RealName}}
-    {{DOB}}
-    {{Email}}
+        <h2>Account Information</h2>
 
+        <div class="account-info">
+            <label class="account-label">Real Name:</label>
+            <p>{{RealName}}</p>
+        </div>
+
+        <div class="account-info">
+            <label class="account-label">Date of Birth:</label>
+            <p>{{DOB}}</p>
+        </div>
+
+        <div class="account-info">
+            <label class="account-label">Email:</label>
+            <p>{{Email}}</p>
+        </div>
+    </div>
 </body>
-
 </html>
