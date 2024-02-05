@@ -27,6 +27,8 @@
         const parity = (parseInt(randomNumber) % 2 === 0) ? 'Even' : 'Odd';
         const range = (parseInt(randomNumber) >= 1 && parseInt(randomNumber) <= 18) ? 'Failed' : 'Passed';
 
+        console.log(randomNumber, color, parity, range);
+
         document.getElementById("number").innerText = `${randomNumber}`;
         document.getElementById("color").innerText = `${color}`;
         document.getElementById("parity").innerText = `${parity}`;
