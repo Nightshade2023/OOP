@@ -6,36 +6,109 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Roulette Wheel Simulation</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .failed,
+        .odd {
+            background-color: #ffd2d2; /* Light red for failed range */
+        }
+
+        .passed,
+        .even {
+            background-color: #c1e1c1; /* Light green for passed range */
+        }
+
+        .red {
+            background-color: #ffb6c1; /* Light red for red color */
+        }
+
+        .black {
+            background-color: #d3d3d3; /* Light gray for black color */
+        }
+    </style>
 </head>
 
 <body>
     <div id="results">
-        <p id="number"></p>
-        <p id="color"></p>
-        <p id="parity"></p>
-        <p id="range"></p>
+        <button onclick="spinRouletteWheel()">Spin</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Color</th>
+                    <th>Parity</th>
+                    <th>Range</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTableBody">
+            </tbody>
+        </table>
     </div>
+    <script>
+        const rouletteWheel = ['0', '34', '10', '21', '28', '4', '18', '9', '27', '22', '12', '3', '17', '20', '11', '33', '2', '10', '32', '00', '15', '8', '25', '1', '31', '20', '14', '30', '7', '24', '29', '35', '6', '13', '23', '19', '5', '36'];
+        const resultsContainer = document.getElementById("resultsTableBody");
+
+        function spinRouletteWheel() {
+            const randomNumber = rouletteWheel[Math.floor(Math.random() * rouletteWheel.length)];
+            const color = (randomNumber === '00') ? 'Black' : (parseInt(randomNumber) % 2 === 0) ? 'Red' : 'Black';
+            const parity = (parseInt(randomNumber) % 2 === 0) ? 'Even' : 'Odd';
+            const range = (parseInt(randomNumber) >= 1 && parseInt(randomNumber) <= 18) ? 'Failed' : 'Passed';
+            const resultRow = document.createElement('tr');
+
+            const numberCell = document.createElement('td');
+            numberCell.textContent = randomNumber;
+            resultRow.appendChild(numberCell);
+            if (color === 'Red') {
+                numberCell.classList.add('red');
+            } else {
+                numberCell.classList.add('black');
+            }
+
+            const colorCell = document.createElement('td');
+            colorCell.textContent = color;
+            resultRow.appendChild(colorCell);
+            if (color === 'Red') {
+                colorCell.classList.add('red');
+            } else {
+                colorCell.classList.add('black');
+            }
+
+            const parityCell = document.createElement('td');
+            parityCell.textContent = parity;
+            resultRow.appendChild(parityCell);
+            if (parity === 'Even') {
+                parityCell.classList.add('even');
+            } else {
+                parityCell.classList.add('odd');
+            }
+
+            const rangeCell = document.createElement('td');
+            rangeCell.textContent = range;
+            resultRow.appendChild(rangeCell);
+            if (range === 'Failed') {
+                rangeCell.classList.add('failed');
+            } else {
+                rangeCell.classList.add('passed');
+            }
+
+            resultsContainer.appendChild(resultRow);
+        }
+    </script>
 </body>
-<script>
-    const rouletteWheel = ['0', '34', '10', '21', '28', '4', '18', '9', '27', '22', '12', '3', '17', '20', '11', '33', '2', '10', '32', '00', '15', '8', '25', '1', '31', '20', '14', '30', '7', '24', '29', '35', '6', '13', '23', '19', '5', '36'];
-
-    function spinRouletteWheel() {
-        const randomNumber = rouletteWheel[Math.floor(Math.random() * rouletteWheel.length)];
-        const color = (randomNumber === '00') ? 'Black' : (parseInt(randomNumber) % 2 === 0) ? 'Red' : 'Black';
-        const parity = (parseInt(randomNumber) % 2 === 0) ? 'Even' : 'Odd';
-        const range = (parseInt(randomNumber) >= 1 && parseInt(randomNumber) <= 18) ? 'Failed' : 'Passed';
-
-        console.log(randomNumber, color, parity, range);
-
-        document.getElementById("number").innerText = `${randomNumber}`;
-        document.getElementById("color").innerText = `${color}`;
-        document.getElementById("parity").innerText = `${parity}`;
-        document.getElementById("range").innerText = `${range}`;
-    }
-
-    spinRouletteWheel();
-</script>
 
 </html>
