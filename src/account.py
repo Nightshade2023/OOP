@@ -36,3 +36,21 @@ class Handler(tornado.web.RequestHandler):
             self.render("account.html", RealName=real_name, DOB=dob, Email=email)
         else:
             self.send_error(404, reason="User not found")
+
+    def post(self):
+        p = self.request.path
+        if p in user_accounts:
+            # Extract the updated information from the submitted form
+            real_name = self.get_body_argument("realName", default=None)
+            dob = self.get_body_argument("dob", default=None)
+            email = self.get_body_argument("email", default=None)
+
+            # Update the user account information
+            if real_name: user_accounts[p]["RealName"] = real_name
+            if dob: user_accounts[p]["DOB"] = dob
+            if email: user_accounts[p]["Email"] = email
+
+            # Redirect or render a confirmation page
+            self.redirect(p)  # Redirect to the same page to show the updated info
+        else:
+            self.write("User not found")
